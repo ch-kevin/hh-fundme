@@ -15,6 +15,9 @@ npx hardhat ignition deploy ./ignition/modules/Lock.ts
 
 npx hardhat run ./scripts/deploy.fundme.ts --network sepolia 
 
+npx hardhat deploy --tags all 本地
+npx hardhat deploy --tags fundme --network sepolia 测试
+
 
 check                 Check whatever you need
 clean                 Clears the cache and deletes all artifacts

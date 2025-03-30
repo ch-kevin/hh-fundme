@@ -1,7 +1,7 @@
 import { assert, expect } from "chai";
 import hre, { deployments, ethers, getNamedAccounts } from "hardhat";
-import { TypedContractMethod } from "../typechain-types/common";
-import { FundMe } from "../typechain-types";
+import { TypedContractMethod } from "../../typechain-types/common";
+import { FundMe } from "../../typechain-types";
 
 
 describe("test fundme contract", async function () {

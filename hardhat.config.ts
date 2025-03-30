@@ -18,6 +18,7 @@ const ETHERSCAN_KEYS: string = process.env.ETHERSCAN_KEYS as string;
 // const PRIVITE_KEY2: string = vars.get("PRIVITE_KEY2");
 
 const config: HardhatUserConfig = {
+  defaultNetwork: "hardhat",
   solidity: "0.8.28",
   networks: {
     sepolia: {
