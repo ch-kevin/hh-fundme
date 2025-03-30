@@ -28,14 +28,17 @@ contract FundMe {
 
 
     modifier WindowsIsCosed() {
-         require(block.timestamp >= deploymentTiemstamp + lockTime,"not closed!!");
+         require(block.timestamp >= deploymentTiemstamp + lockTime,"windows is not closed!!");
         _;
     }
 
     modifier OnlyOwner() {
-         require(msg.sender == owner,"called by owner!");
+         require(msg.sender == owner,"this function can only be called by owner");
         _;
     }
+
+    event FundWithdrawByOwner(uint256);
+    event RefundByFunder(address, uint256);
 
     constructor(uint256 _locktime, address dataFeedAddr){
         dataFeed = AggregatorV3Interface(dataFeedAddr);
@@ -70,25 +73,29 @@ contract FundMe {
 
 
     function fund() external payable {
-        require(block.timestamp < deploymentTiemstamp + lockTime,"closed!!");
+        require(block.timestamp < deploymentTiemstamp + lockTime,"windoiws is closed!!");
         require(convertEthToUsd(msg.value) >= MIN_PRICE,"send more eth");
         fundersToAmount[msg.sender] = msg.value;
     }
 
     function  getFund() external payable WindowsIsCosed OnlyOwner{
-        require(convertEthToUsd(address(this).balance) >= TARGET_VALUE,"Target is not reached");
-        payable(msg.sender).transfer(address(this).balance);
+        uint256 banalce = address(this).balance;
+        require(convertEthToUsd(banalce)>= TARGET_VALUE,"Target is not reached");
+        payable(msg.sender).transfer(banalce);
         fundersToAmount[msg.sender] = 0; 
         getFundSuccess = true;
+        emit FundWithdrawByOwner(banalce);
     }
 
     function reFund() external WindowsIsCosed{
-        require(convertEthToUsd(address(this).balance) < TARGET_VALUE,"Target is not reached");
-        require(fundersToAmount[msg.sender] != 0,"0");
+        require(convertEthToUsd(address(this).balance) < TARGET_VALUE,"Target is reached");
+        require(fundersToAmount[msg.sender] != 0, "there is no fund for you");
         bool success;
-        (success,) = payable(msg.sender).call{value: fundersToAmount[msg.sender]}("");
+        uint256 balance = fundersToAmount[msg.sender];
+        (success,) = payable(msg.sender).call{value: balance}("");
         require(success,"failed");
         fundersToAmount[msg.sender] = 0;
+        emit RefundByFunder(msg.sender,balance);
     }
 
     function setFundersToAmount(address funder,uint256 _amount) external {

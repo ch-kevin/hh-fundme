@@ -5,6 +5,11 @@ import "dotenv/config";
 import "./task/index";
 import 'hardhat-deploy';
 
+import '@nomicfoundation/hardhat-ethers';
+import 'hardhat-deploy';
+import 'hardhat-deploy-ethers';
+
+
 //import * as envEnc from "@chainlink/env-enc";
 //envEnc.config();
 

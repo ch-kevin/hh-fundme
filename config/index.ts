@@ -1,6 +1,7 @@
 const DECIMAL = 8;
 const INITIAL_ASNWER  = 300000000000
 const LOCK_TIME = 180;
+const CONFIRMATIONS = 5;
 const devlopmentChains = [
     'hardhat',
     'local'
@@ -16,5 +17,6 @@ export {
     INITIAL_ASNWER,
     devlopmentChains,
     networkConfig,
-    LOCK_TIME
+    LOCK_TIME,
+    CONFIRMATIONS
 }
