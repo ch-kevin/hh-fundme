@@ -1,0 +1,7 @@
+const DECIMAL = 8;
+const INITIAL_ASNWER  = 300000000000
+
+export {
+    DECIMAL,
+    INITIAL_ASNWER
+}

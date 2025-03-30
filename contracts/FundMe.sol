@@ -14,7 +14,7 @@ contract FundMe {
 
     mapping(address=>uint256) public fundersToAmount;
 
-    AggregatorV3Interface internal dataFeed;
+    AggregatorV3Interface public dataFeed;
 
     uint256 MIN_PRICE = 100 * 10**18;
     uint256 constant TARGET_VALUE = 1000 * 10**18;
@@ -36,7 +36,6 @@ contract FundMe {
          require(msg.sender == owner,"called by owner!");
         _;
     }
-
 
     constructor(uint256 _locktime){
         dataFeed = AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);

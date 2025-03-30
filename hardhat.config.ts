@@ -3,6 +3,7 @@ import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-verify";
 import "dotenv/config";
 import "./task/index";
+import 'hardhat-deploy';
 
 //import * as envEnc from "@chainlink/env-enc";
 //envEnc.config();
@@ -36,6 +37,15 @@ const config: HardhatUserConfig = {
     // Doesn't need an API key
     // enabled: true
   // }
+  ,
+  namedAccounts: {
+    firstAccount: {
+      default: 0
+    },
+    secondAccount: {
+      default: 1
+    },
+  },
 };
 
 export default config;
