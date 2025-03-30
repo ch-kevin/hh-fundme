@@ -1,14 +1,15 @@
 import { assert, expect } from "chai";
-import hre, { deployments, ethers, getNamedAccounts } from "hardhat";
+import hre, { deployments, ethers, getNamedAccounts, network } from "hardhat";
 import { TypedContractMethod } from "../../typechain-types/common";
 import { FundMe } from "../../typechain-types";
 
 import {time,mine} from "@nomicfoundation/hardhat-network-helpers"
 import { Deployment } from "hardhat-deploy/dist/types";
+import { devlopmentChains } from "../../config";
 
-
-
-describe("test fundme contract", async function () {
+!devlopmentChains.includes(network.name)
+? describe.skip
+: describe("test fundme contract", async function () {
   // We define a fixture to reuse the same setup in every test.
   // We use loadFixture to run this setup once, snapshot that state,
   // and reset Hardhat Network to that snapshot in every test.

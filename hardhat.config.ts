@@ -9,6 +9,8 @@ import '@nomicfoundation/hardhat-ethers';
 import 'hardhat-deploy';
 import 'hardhat-deploy-ethers';
 
+import "hardhat-gas-reporter";
+
 
 //import * as envEnc from "@chainlink/env-enc";
 //envEnc.config();
@@ -25,6 +27,9 @@ const ETHERSCAN_KEYS: string = process.env.ETHERSCAN_KEYS as string;
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   solidity: "0.8.28",
+  mocha:{
+    timeout: 300000
+  },
   networks: {
     sepolia: {
       url: SEPOLIA_URL,
@@ -52,6 +57,9 @@ const config: HardhatUserConfig = {
       default: 1
     },
   },
+  gasReporter: {
+    enabled: true
+  }
 };
 
 export default config;
