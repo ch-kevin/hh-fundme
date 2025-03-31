@@ -11,6 +11,13 @@ import 'hardhat-deploy-ethers';
 
 import "hardhat-gas-reporter";
 
+// change to yours, With the global proxy enabled, change the proxyUrl to your own proxy link. The port may be different for each client.
+const proxyUrl = "http://127.0.0.1:33210" 
+const { ProxyAgent, setGlobalDispatcher } = require("undici")
+const proxyAgent = new ProxyAgent(proxyUrl)
+setGlobalDispatcher(proxyAgent)
+
+// export https_proxy=http://127.0.0.1:33210 http_proxy=http://127.0.0.1:33210 all_proxy=socks5://127.0.0.1:33211
 
 //import * as envEnc from "@chainlink/env-enc";
 //envEnc.config();

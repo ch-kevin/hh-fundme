@@ -33,6 +33,7 @@ const main: DeployFunction = async ({
         waitConfirmations: confirmations
     });
 
+    console.log("HRE.network.config.chainId",HRE.network.config.chainId,HRE.network.config.chainId === 11155111);
     if(HRE.network.config.chainId === 11155111 && process.env.ETHERSCAN_KEYS){
         await HRE.run("verify:verify", {
             address: fundme.address,
